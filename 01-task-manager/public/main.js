@@ -2,11 +2,11 @@
 /* ==================================================================================================== */
 
 const alert = document.querySelector('.alert');
-const form = document.querySelector('.grocery-form');
-const grocery = document.querySelector('#grocery');
+const form = document.querySelector('.task-form');
+const task = document.querySelector('#task');
 const submitBtn = document.querySelector('.submit-btn');
-const container = document.querySelector('.grocery-container');
-const list = document.querySelector('.grocery-list');
+const container = document.querySelector('.task-container');
+const list = document.querySelector('.task-list');
 const clearBtn = document.querySelector('.clear-btn');
 
 /* EDIT VARIABLES */
@@ -20,15 +20,15 @@ let editFlag = false;
 
 function submitForm(e) {
     e.preventDefault();
-    const value = grocery.value;
+    const value = task.value;
     if (value && !editFlag) {
         createListItem(value);
         container.classList.add('show-container');
-        displayAlert('item added to the list', 'success');
+        displayAlert('Task added to the list', 'success');
         setBackToDefault();
     } else if (value && editFlag) {
-        editElement.textContent = grocery.value;
-        displayAlert('item has been updated', 'success');
+        editElement.textContent = task.value;
+        displayAlert('Task has been updated', 'success');
         setBackToDefault();
     } else {
         displayAlert('please enter value', 'danger');
@@ -37,14 +37,14 @@ function submitForm(e) {
 
 function editItem(e) {
     editElement = e.currentTarget.parentElement.previousElementSibling;
-    grocery.value = editElement.textContent;
+    task.value = editElement.textContent;
     editFlag = true;
-    submitBtn.textContent = 'edit';
+    submitBtn.textContent = 'edit task';
 }
 
 function deleteItem(e) {
     e.currentTarget.parentElement.parentElement.remove();
-    displayAlert('Item removed from the list', 'danger');
+    displayAlert('Task removed from the list', 'danger');
     setBackToDefault();
     if (list.children.length < 1) {
         container.classList.remove('show-container');
@@ -52,11 +52,11 @@ function deleteItem(e) {
 }
 
 function clearItems() {
-    const items = document.querySelectorAll('.grocery-item');
+    const items = document.querySelectorAll('.task-item');
     items.forEach(function (item) {
         item.remove();
     });
-    displayAlert('items removed', 'danger');
+    displayAlert('tasks removed', 'danger');
     container.classList.remove('show-container');
     setBackToDefault();
 }
@@ -70,14 +70,14 @@ function displayAlert(text, action) {
 }
 
 function setBackToDefault() {
-    grocery.value = '';
+    task.value = '';
     editFlag = false;
-    submitBtn.textContent = 'submit';
+    submitBtn.textContent = 'add task';
 }
 
 function createListItem(value) {
     const element = document.createElement('article');
-    element.classList.add('grocery-item');
+    element.classList.add('task-item');
     element.innerHTML = `<p class="title"></p>
                              <div class="btn-container">
                                 <button type="button" class="edit-btn">

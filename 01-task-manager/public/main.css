@@ -80,7 +80,7 @@ h6 {
     font-size: 1rem;
 }
 
-/* GROCERY BUD */
+/* TASK MANAGER */
 /* ==================================================================================================== */
 
 .section-center {
@@ -117,17 +117,17 @@ h6 {
     background-color: rgb(200, 255, 200);
 }
 
-.grocery-form h4 {
+.task-form h4 {
     text-align: center;
     margin-bottom: 1.5rem;
     color: var(--colorBlack);
 }
 
-.grocery-form .form-control {
+.task-form .form-control {
     display: flex;
 }
 
-.grocery-form .form-input {
+.task-form .form-input {
     border-radius: var(--borderRadius);
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
@@ -139,7 +139,7 @@ h6 {
     transition: var(--transition);
 }
 
-.grocery-form .form-input:focus {
+.task-form .form-input:focus {
     outline: none;
 }
 
@@ -161,7 +161,7 @@ h6 {
     background-color: var(--colorBlue);
 }
 
-.grocery-container {
+.task-container {
     margin-top: 1.5rem;
     visibility: hidden;
 }
@@ -170,7 +170,7 @@ h6 {
     visibility: visible;
 }
 
-.grocery-item {
+.task-item {
     display: flex;
     align-items: center;
     justify-content: space-between;

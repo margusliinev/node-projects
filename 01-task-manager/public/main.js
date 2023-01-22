@@ -19,7 +19,7 @@ let editFlag = false;
 /* ==================================================================================================== */
 
 function submitForm(e) {
-    e.preventDefault();
+    // e.preventDefault();
     const value = task.value;
     if (value && !editFlag) {
         createListItem(value);

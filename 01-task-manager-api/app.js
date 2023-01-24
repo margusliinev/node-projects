@@ -4,9 +4,11 @@ const app = express();
 const port = 3000;
 const tasks = require('./routes/tasks');
 const connectDB = require('./db/connect');
+const notFound = require('./middleware/not-found');
 
 app.use(express.json());
 app.use('/', tasks);
+app.use(notFound);
 
 async function start() {
     try {

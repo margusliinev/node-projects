@@ -1,5 +1,9 @@
 const Task = require('../models/task');
 
+function welcomePage(req, res) {
+    res.send('<h1>Task Manager API</h1>');
+}
+
 async function getAllTasks(req, res) {
     try {
         const tasks = await Task.find({});
@@ -54,4 +58,4 @@ async function deleteTask(req, res) {
     }
 }
 
-module.exports = { getAllTasks, createTask, getTask, updateTask, deleteTask };
+module.exports = { welcomePage, getAllTasks, createTask, getTask, updateTask, deleteTask };

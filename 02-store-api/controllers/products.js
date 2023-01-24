@@ -1,9 +1,12 @@
+const Product = require('../models/product');
+
 function welcomePage(req, res) {
     res.status(200).send('<h1>Store API</h1>');
 }
 
 async function getAllProductsStatic(req, res) {
-    res.status(200).json({ msg: 'Products testing route' });
+    const products = await Product.find({});
+    res.status(200).json({ products });
 }
 
 async function getAllProducts(req, res) {

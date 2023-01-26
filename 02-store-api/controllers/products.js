@@ -4,13 +4,7 @@ function welcomePage(req, res) {
     res.status(200).send('<h1>Store API</h1>');
 }
 
-async function getAllProductsStatic(req, res) {
-    const products = await Product.find({});
-    res.status(200).json({ products });
-}
-
 async function getAllProducts(req, res) {
-    console.log(req.query);
     const { featured, company, name } = req.query;
     const queryObject = {};
     if (featured) {
@@ -20,10 +14,10 @@ async function getAllProducts(req, res) {
         queryObject.company = company;
     }
     if (name) {
-        queryObject.name = name;
+        queryObject.name = { $regex: name, $options: 'i' };
     }
     const products = await Product.find(queryObject);
     res.status(200).json({ products, nbHits: products.length });
 }
 
-module.exports = { welcomePage, getAllProductsStatic, getAllProducts };
+module.exports = { welcomePage, getAllProducts };

@@ -33,7 +33,13 @@ async function getSingleProduct(req, res) {
     res.status(200).json({ product });
 }
 
-async function updateProduct(req, res) {}
+async function updateProduct(req, res) {
+    const product = await Product.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true, runValidators: true });
+    if (!product) {
+        return res.status(404).json({ msg: `No product with id: ${req.params.id}` });
+    }
+    res.status(200).json({ product });
+}
 
 async function deleteProduct(req, res) {
     const product = await Product.findOneAndDelete({ _id: req.params.id });

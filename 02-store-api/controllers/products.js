@@ -25,4 +25,22 @@ async function createProduct(req, res) {
     res.status(201).json({ product });
 }
 
-module.exports = { welcomePage, getAllProducts, createProduct };
+async function getSingleProduct(req, res) {
+    const product = await Product.findOne({ _id: req.params.id });
+    if (!product) {
+        return res.status(404).json({ msg: `No product with id: ${req.params.id}` });
+    }
+    res.status(200).json({ product });
+}
+
+async function updateProduct(req, res) {}
+
+async function deleteProduct(req, res) {
+    const product = await Product.findOneAndDelete({ _id: req.params.id });
+    if (!product) {
+        return res.status(404).json({ msg: `No product with id: ${req.params.id}` });
+    }
+    res.status(200).json({ product });
+}
+
+module.exports = { welcomePage, getAllProducts, createProduct, getSingleProduct, updateProduct, deleteProduct };

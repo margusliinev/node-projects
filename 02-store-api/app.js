@@ -8,6 +8,7 @@ const connectDB = require('./db/connect');
 const notFound = require('./middleware/not-found');
 const errorHandler = require('./middleware/error-handler');
 
+app.use(express.json());
 app.use('/', products);
 app.use(notFound);
 app.use(errorHandler);

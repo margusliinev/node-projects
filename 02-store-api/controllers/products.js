@@ -20,4 +20,9 @@ async function getAllProducts(req, res) {
     res.status(200).json({ products, nbHits: products.length });
 }
 
-module.exports = { welcomePage, getAllProducts };
+async function createProduct(req, res) {
+    const product = await Product.create(req.body);
+    res.status(201).json({ product });
+}
+
+module.exports = { welcomePage, getAllProducts, createProduct };

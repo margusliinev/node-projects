@@ -2,16 +2,14 @@
 
 ## Description
 
-This is a repository for projects built with NodeJS.
+This is a repository for projects built with NodeJS, Express and PostgreSQL.
 
 ## Technologies
 
 -   NodeJS
 -   Express
--   Mongoose
--   MongoDB
+-   PostgreSQL
 
 ## Projects
 
 1. Task Manager API
-2. Store API

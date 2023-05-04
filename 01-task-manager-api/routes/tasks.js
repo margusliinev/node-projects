@@ -4,6 +4,6 @@ const { welcomePage, getAllTasks, createTask, getTask, updateTask, deleteTask } 
 
 router.route('/').get(welcomePage);
 router.route('/tasks').get(getAllTasks).post(createTask);
-router.route('/tasks/:id').get(getTask).patch(updateTask).delete(deleteTask);
+router.route('/tasks/:id').get(getTask).put(updateTask).delete(deleteTask);
 
 module.exports = router;

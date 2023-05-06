@@ -13,3 +13,4 @@ This is a repository for projects built with NodeJS, Express and PostgreSQL.
 ## Projects
 
 1. Task Manager API
+2. Store API

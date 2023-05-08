@@ -2,7 +2,28 @@ const db = require('../db');
 
 const getAllProducts = async (req, res) => {
     try {
-        const products = await db.query('select * from products');
+        const { name, price, company, rating } = req.query;
+        let query = 'select * from products WHERE 1=1';
+        let values = [];
+        if (name) {
+            query += ` AND name LIKE $${values.length + 1}`;
+            values.push('%' + req.query.name + '%');
+        }
+        if (price) {
+            query += ` AND price > $${values.length + 1}`;
+            values.push(req.query.price);
+        }
+        if (company) {
+            query += ` AND company = $${values.length + 1}`;
+            values.push(req.query.company);
+        }
+        if (rating) {
+            query += ` AND rating = $${values.length + 1}`;
+            values.push(req.query.rating);
+        }
+        console.log(query);
+        console.log(values);
+        const products = await db.query(query, values);
         res.status(200).json({ products });
     } catch (error) {
         res.status(500).json({ msg: error });

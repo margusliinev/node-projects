@@ -2,23 +2,28 @@ const db = require('../db');
 
 const getAllProducts = async (req, res) => {
     try {
-        const { name, price, company, rating, sort } = req.query;
-        let query = 'select * from products WHERE 1=1';
+        const { name, price, company, rating, sort, fields } = req.query;
+        let query = 'select ';
         let values = [];
+        if (fields) {
+            query += ` ${'id,' + fields} from products`;
+        } else {
+            query += ' * from products';
+        }
         if (name) {
-            query += ` AND name LIKE $${values.length + 1}`;
+            query += ` WHERE 1=1 AND name LIKE $${values.length + 1}`;
             values.push('%' + req.query.name + '%');
         }
         if (price) {
-            query += ` AND price > $${values.length + 1}`;
+            query += ` WHERE 1=1 AND price > $${values.length + 1}`;
             values.push(req.query.price);
         }
         if (company) {
-            query += ` AND company = $${values.length + 1}`;
+            query += ` WHERE 1=1 AND company = $${values.length + 1}`;
             values.push(req.query.company);
         }
         if (rating) {
-            query += ` AND rating = $${values.length + 1}`;
+            query += ` WHERE 1=1 AND rating = $${values.length + 1}`;
             values.push(req.query.rating);
         }
         if (sort) {
@@ -41,6 +46,7 @@ const getAllProducts = async (req, res) => {
                 query += ' ORDER BY rating DESC';
             }
         }
+        console.log(query);
         const products = await db.query(query, values);
         res.status(200).json({ products });
     } catch (error) {

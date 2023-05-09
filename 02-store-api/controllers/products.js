@@ -2,7 +2,7 @@ const db = require('../db');
 
 const getAllProducts = async (req, res) => {
     try {
-        const { name, price, company, rating, sort, fields } = req.query;
+        const { name, price, company, rating, sort, fields, page, limit } = req.query;
         let query = 'select ';
         let values = [];
         if (fields) {
@@ -46,7 +46,12 @@ const getAllProducts = async (req, res) => {
                 query += ' ORDER BY rating DESC';
             }
         }
-        console.log(query);
+        if (page) {
+            const page = Number(req.query.page) || 1;
+            const limit = Number(req.query.limit) || 2;
+            const skip = (page - 1) * limit;
+            query += ` LIMIT ${limit} OFFSET ${skip}`;
+        }
         const products = await db.query(query, values);
         res.status(200).json({ products });
     } catch (error) {

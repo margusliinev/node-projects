@@ -2,7 +2,7 @@ const db = require('../db');
 
 const getAllProducts = async (req, res) => {
     try {
-        const { name, price, company, rating, sort, fields, page, limit } = req.query;
+        const { name, price, company, rating, sort, fields, page } = req.query;
         let query = 'select ';
         let values = [];
         if (fields) {
